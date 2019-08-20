@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    active: dev
+  freemarker:
+    cache: false
+    charset: utf-8
+    content-type: text/html
+    enabled: true
+    settings:
+      number_format: '0'
+pagehelper:
+  autoDialect: true
+  closeConn: true
+  reasonable: true
+logging:
+  path: /data/logs/xyy-erp-data-export
+  file: wx-transactionsingle
+  level:
+    root: info
