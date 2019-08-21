@@ -8,6 +8,8 @@ package com.wx.inspect.transaction.single.po;
  */ 
 public class TbAuthPo {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * ID
      */ 

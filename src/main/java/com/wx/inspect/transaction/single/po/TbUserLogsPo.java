@@ -10,6 +10,8 @@ import java.util.Date;
  */ 
 public class TbUserLogsPo {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * ID
      */ 
