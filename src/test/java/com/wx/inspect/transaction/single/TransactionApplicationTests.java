@@ -1,4 +1,4 @@
-package com.wx.inspect.transactionsingle;
+package com.wx.inspect.transaction.single;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

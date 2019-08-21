@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.inspect.transaction.single.mapper.TbDicAreaMapper">
+    <resultMap id="tbDicArea" type="com.wx.inspect.transaction.single.po.TbDicAreaPo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="pcode" property="pcode" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="initials" property="initials" jdbcType="VARCHAR"/>
+        <result column="depth" property="depth" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!-- 基础字段 -->
+    <sql id="Base_Columns">
+        `id`,
+        <include refid="Columns_For_Insert"/>
+    </sql>
+
+    <!-- Insert使用字段 -->
+    <sql id="Columns_For_Insert">
+        `code`, `pcode`, `name`, `initials`, `depth`
+    </sql>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.wx.inspect.transaction.single.po.TbDicAreaPo" useGeneratedKeys="true" keyProperty="id">
+        insert into TB_DIC_AREA
+        (    <include refid="Columns_For_Insert"/>    )
+        values(
+            #{code, jdbcType=INTEGER}, #{pcode, jdbcType=INTEGER}, #{name, jdbcType=VARCHAR}, 
+            #{initials, jdbcType=VARCHAR}, #{depth, jdbcType=TINYINT}
+        )
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into TB_DIC_AREA
+        (    <include refid="Columns_For_Insert"/>    )
+        values
+        <foreach collection="list" item="item" separator="," >
+            (
+                #{item.code, jdbcType=INTEGER}, #{item.pcode, jdbcType=INTEGER}, #{item.name, jdbcType=VARCHAR}, 
+                #{item.initials, jdbcType=VARCHAR}, #{item.depth, jdbcType=TINYINT}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 根据主键删除 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from TB_DIC_AREA
+        where `id` = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <!-- 根据主键更新非空字段 -->
+    <update id="updateByPrimaryKey" parameterType="com.wx.inspect.transaction.single.po.TbDicAreaPo">
+        update TB_DIC_AREA
+        <set>
+            <if test=" code != null " >
+                `code` = #{code, jdbcType=INTEGER},
+            </if>
+            <if test=" pcode != null " >
+                `pcode` = #{pcode, jdbcType=INTEGER},
+            </if>
+            <if test=" name != null and name != '' " >
+                `name` = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test=" initials != null and initials != '' " >
+                `initials` = #{initials, jdbcType=VARCHAR},
+            </if>
+            <if test=" depth != null " >
+                `depth` = #{depth, jdbcType=TINYINT},
+            </if>
+        </set>
+        where `id` = #{id, jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据主键查询 -->
+    <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="tbDicArea">
+        select <include refid="Base_Columns"/>
+        from TB_DIC_AREA
+        where `id` = #{id, jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据主键查询 -->
+    <select id="queryList" parameterType="com.wx.inspect.transaction.single.po.TbDicAreaPo" resultMap="tbDicArea">
+        select <include refid="Base_Columns"/>
+        from TB_DIC_AREA
+        <where>
+            <if test=" id != null " >
+                AND `id` = #{id, jdbcType=INTEGER}
+            </if>
+            <if test=" code != null " >
+                AND `code` = #{code, jdbcType=INTEGER}
+            </if>
+            <if test=" pcode != null " >
+                AND `pcode` = #{pcode, jdbcType=INTEGER}
+            </if>
+            <if test=" name != null and name != '' " >
+                AND `name` = #{name, jdbcType=VARCHAR}
+            </if>
+            <if test=" initials != null and initials != '' " >
+                AND `initials` = #{initials, jdbcType=VARCHAR}
+            </if>
+            <if test=" depth != null " >
+                AND `depth` = #{depth, jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+    <!-- 统计数量 -->
+    <select id="count" parameterType="com.wx.inspect.transaction.single.po.TbDicAreaPo" resultMap="tbDicArea">
+        select count(*)
+        from TB_DIC_AREA
+        <where>
+            <if test=" id != null " >
+                AND `id` = #{id, jdbcType=INTEGER}
+            </if>
+            <if test=" code != null " >
+                AND `code` = #{code, jdbcType=INTEGER}
+            </if>
+            <if test=" pcode != null " >
+                AND `pcode` = #{pcode, jdbcType=INTEGER}
+            </if>
+            <if test=" name != null and name != '' " >
+                AND `name` = #{name, jdbcType=VARCHAR}
+            </if>
+            <if test=" initials != null and initials != '' " >
+                AND `initials` = #{initials, jdbcType=VARCHAR}
+            </if>
+            <if test=" depth != null " >
+                AND `depth` = #{depth, jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+</mapper>

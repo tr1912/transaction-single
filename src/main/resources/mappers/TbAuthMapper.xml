@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.inspect.transaction.single.mapper.TbAuthMapper">
+    <resultMap id="tbAuth" type="com.wx.inspect.transaction.single.po.TbAuthPo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="auth_name" property="authName" jdbcType="VARCHAR"/>
+        <result column="auth_code" property="authCode" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="is_del" property="isDel" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!-- 基础字段 -->
+    <sql id="Base_Columns">
+        `id`,
+        <include refid="Columns_For_Insert"/>
+    </sql>
+
+    <!-- Insert使用字段 -->
+    <sql id="Columns_For_Insert">
+        `auth_name`, `auth_code`, `type`, `is_del`
+    </sql>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.wx.inspect.transaction.single.po.TbAuthPo" useGeneratedKeys="true" keyProperty="id">
+        insert into TB_AUTH
+        (    <include refid="Columns_For_Insert"/>    )
+        values(
+            #{authName, jdbcType=VARCHAR}, #{authCode, jdbcType=VARCHAR}, #{type, jdbcType=TINYINT}, 
+            #{isDel, jdbcType=TINYINT}
+        )
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into TB_AUTH
+        (    <include refid="Columns_For_Insert"/>    )
+        values
+        <foreach collection="list" item="item" separator="," >
+            (
+                #{item.authName, jdbcType=VARCHAR}, #{item.authCode, jdbcType=VARCHAR}, #{item.type, jdbcType=TINYINT}, 
+                #{item.isDel, jdbcType=TINYINT}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 根据主键删除 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from TB_AUTH
+        where `id` = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <!-- 根据主键更新非空字段 -->
+    <update id="updateByPrimaryKey" parameterType="com.wx.inspect.transaction.single.po.TbAuthPo">
+        update TB_AUTH
+        <set>
+            <if test=" authName != null and authName != '' " >
+                `auth_name` = #{authName, jdbcType=VARCHAR},
+            </if>
+            <if test=" authCode != null and authCode != '' " >
+                `auth_code` = #{authCode, jdbcType=VARCHAR},
+            </if>
+            <if test=" type != null " >
+                `type` = #{type, jdbcType=TINYINT},
+            </if>
+            <if test=" isDel != null " >
+                `is_del` = #{isDel, jdbcType=TINYINT},
+            </if>
+        </set>
+        where `id` = #{id, jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据主键查询 -->
+    <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="tbAuth">
+        select <include refid="Base_Columns"/>
+        from TB_AUTH
+        where `id` = #{id, jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据主键查询 -->
+    <select id="queryList" parameterType="com.wx.inspect.transaction.single.po.TbAuthPo" resultMap="tbAuth">
+        select <include refid="Base_Columns"/>
+        from TB_AUTH
+        <where>
+            <if test=" id != null " >
+                AND `id` = #{id, jdbcType=INTEGER}
+            </if>
+            <if test=" authName != null and authName != '' " >
+                AND `auth_name` = #{authName, jdbcType=VARCHAR}
+            </if>
+            <if test=" authCode != null and authCode != '' " >
+                AND `auth_code` = #{authCode, jdbcType=VARCHAR}
+            </if>
+            <if test=" type != null " >
+                AND `type` = #{type, jdbcType=TINYINT}
+            </if>
+            <if test=" isDel != null " >
+                AND `is_del` = #{isDel, jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+    <!-- 统计数量 -->
+    <select id="count" parameterType="com.wx.inspect.transaction.single.po.TbAuthPo" resultMap="tbAuth">
+        select count(*)
+        from TB_AUTH
+        <where>
+            <if test=" id != null " >
+                AND `id` = #{id, jdbcType=INTEGER}
+            </if>
+            <if test=" authName != null and authName != '' " >
+                AND `auth_name` = #{authName, jdbcType=VARCHAR}
+            </if>
+            <if test=" authCode != null and authCode != '' " >
+                AND `auth_code` = #{authCode, jdbcType=VARCHAR}
+            </if>
+            <if test=" type != null " >
+                AND `type` = #{type, jdbcType=TINYINT}
+            </if>
+            <if test=" isDel != null " >
+                AND `is_del` = #{isDel, jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+</mapper>

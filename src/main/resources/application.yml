@@ -12,12 +12,18 @@ spring:
     enabled: true
     settings:
       number_format: '0'
+
 pagehelper:
   autoDialect: true
   closeConn: true
   reasonable: true
+
 logging:
-  path: /data/logs/xyy-erp-data-export
+  path: /data/logs/wx-inspect-transaction-single
   file: wx-transactionsingle
   level:
     root: info
+
+mybatis:
+  type-aliases-package: com.wx.inspect.transaction.single.po
+  mapper-locations: classpath:/mappers/**Mapper.xml
