@@ -38,7 +38,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form method="post" action="#" role="form" class="text-center">
+					<form method="post" action="/login" role="form" class="text-center">
 						<div class="alert alert-info alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 								×

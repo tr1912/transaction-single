@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     /**
-     * 首页
+     * 登录页
      * @return
      */
     @RequestMapping(value = {"/","login"})
@@ -38,5 +38,11 @@ public class LoginController {
         return model;
     }
 
+
+    @RequestMapping(value = "index")
+    public ModelAndView index(){
+        ModelAndView model =new ModelAndView("index");
+        return model;
+    }
 
 }
