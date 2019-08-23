@@ -39,7 +39,7 @@
 
 
             <div class="panel-body">
-            <form class="form-horizontal m-t-20" action="/index">
+            <form class="form-horizontal m-t-20" id="login_form" action="/login/login">
                 
                 <div class="form-group ">
                     <div class="col-xs-12">
@@ -88,13 +88,6 @@
             </div>
             
         </div>
-        
-        
-
-        
-    	<script>
-            var resizefunc = [];
-        </script>
 
         <!-- jQuery  -->
         <script src="assets/js/jquery.min.js"></script>
@@ -108,9 +101,30 @@
         <script src="assets/js/jquery.nicescroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
+        <script src="assets/plugins/notifyjs/dist/notify.min.js"></script>
+        <script src="assets/plugins/notifications/notify-metro.js"></script>
 
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
+        <script src="assets/js/jquery.form.js"></script>
+
+        <script type="text/javascript">
+            var resizefunc = [];
+
+            // 加载项
+            $(function() {
+                $('#login_form').ajaxForm(function(data){
+                    if (data.code == '1'){
+                        console.log(data.message)
+                        window.location.href="/index";
+                    } else {
+                        $.Notification.autoHideNotify('warning','top left','警告', data.message);
+                        return;
+                    }
+                });
+            });
+
+        </script>
 	
 	</body>
 </html>

@@ -5,6 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="auth" property="auth" jdbcType="INTEGER"/>
         <result column="is_del" property="isDel" jdbcType="TINYINT"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
@@ -20,7 +21,7 @@
 
     <!-- Insert使用字段 -->
     <sql id="Columns_For_Insert">
-        `user_name`, `password`, `auth`, `is_del`, `mobile`, `area`, `create_time`
+        `user_name`, `password`, `email`, `auth`, `is_del`, `mobile`, `area`, `create_time`
     </sql>
 
     <!-- 插入数据 -->
@@ -28,9 +29,9 @@
         insert into TB_USER_BASE
         (    <include refid="Columns_For_Insert"/>    )
         values(
-            #{userName, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{auth, jdbcType=INTEGER}, 
-            #{isDel, jdbcType=TINYINT}, #{mobile, jdbcType=VARCHAR}, #{area, jdbcType=VARCHAR}, 
-            #{createTime, jdbcType=TIMESTAMP}
+            #{userName, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR}, 
+            #{auth, jdbcType=INTEGER}, #{isDel, jdbcType=TINYINT}, #{mobile, jdbcType=VARCHAR}, 
+            #{area, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}
         )
     </insert>
 
@@ -41,9 +42,9 @@
         values
         <foreach collection="list" item="item" separator="," >
             (
-                #{item.userName, jdbcType=VARCHAR}, #{item.password, jdbcType=VARCHAR}, #{item.auth, jdbcType=INTEGER}, 
-                #{item.isDel, jdbcType=TINYINT}, #{item.mobile, jdbcType=VARCHAR}, #{item.area, jdbcType=VARCHAR}, 
-                #{item.createTime, jdbcType=TIMESTAMP}
+                #{item.userName, jdbcType=VARCHAR}, #{item.password, jdbcType=VARCHAR}, 
+                #{item.email, jdbcType=VARCHAR}, #{item.auth, jdbcType=INTEGER}, #{item.isDel, jdbcType=TINYINT}, 
+                #{item.mobile, jdbcType=VARCHAR}, #{item.area, jdbcType=VARCHAR}, #{item.createTime, jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
@@ -63,6 +64,9 @@
             </if>
             <if test=" password != null and password != '' " >
                 `password` = #{password, jdbcType=VARCHAR},
+            </if>
+            <if test=" email != null and email != '' " >
+                `email` = #{email, jdbcType=VARCHAR},
             </if>
             <if test=" auth != null " >
                 `auth` = #{auth, jdbcType=INTEGER},
@@ -104,6 +108,9 @@
             <if test=" password != null and password != '' " >
                 AND `password` = #{password, jdbcType=VARCHAR}
             </if>
+            <if test=" email != null and email != '' " >
+                AND `email` = #{email, jdbcType=VARCHAR}
+            </if>
             <if test=" auth != null " >
                 AND `auth` = #{auth, jdbcType=INTEGER}
             </if>
@@ -136,6 +143,9 @@
             <if test=" password != null and password != '' " >
                 AND `password` = #{password, jdbcType=VARCHAR}
             </if>
+            <if test=" email != null and email != '' " >
+                AND `email` = #{email, jdbcType=VARCHAR}
+            </if>
             <if test=" auth != null " >
                 AND `auth` = #{auth, jdbcType=INTEGER}
             </if>
@@ -152,5 +162,15 @@
                 AND `create_time` = #{createTime, jdbcType=TIMESTAMP}
             </if>
         </where>
+    </select>
+
+    <select id="findUserByName" resultMap="tbUserBase">
+        select <include refid="Base_Columns"/>
+        from TB_USER_BASE
+        where
+          is_del=0
+          <if test=" userName != null and userName != ''">
+              AND `user_name` = #{userName, jdbcType=VARCHAR}
+          </if>
     </select>
 </mapper>

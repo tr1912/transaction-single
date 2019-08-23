@@ -12,6 +12,9 @@ spring:
     enabled: true
     settings:
       number_format: '0'
+  aop:
+    auto: true
+    proxy-target-class: false
 
 pagehelper:
   autoDialect: true

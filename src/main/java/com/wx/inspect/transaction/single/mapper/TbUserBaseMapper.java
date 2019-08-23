@@ -1,6 +1,7 @@
 package com.wx.inspect.transaction.single.mapper;
 
 import com.wx.inspect.transaction.single.po.TbUserBasePo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -67,4 +68,11 @@ public interface TbUserBaseMapper {
      * @return 记录总数
      */
     int count(TbUserBasePo condition);
+
+    /**
+     * 按照登录名查询用户
+     * @param userName
+     * @return
+     */
+    TbUserBasePo findUserByName(@Param("userName") String userName);
 }
