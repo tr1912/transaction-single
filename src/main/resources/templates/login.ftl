@@ -43,13 +43,13 @@
                 
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="用户名">
+                        <input class="form-control" type="text" name="userName" required="" placeholder="用户名">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="password" required="" placeholder="密码">
+                        <input class="form-control" type="password" name="password" required="" placeholder="密码">
                     </div>
                 </div>
 

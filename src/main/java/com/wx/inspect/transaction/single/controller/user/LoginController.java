@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
     public MessageResult login(String userName,String password){
 
         TbUserBasePo userBasePo = userBaseSerivce.findUserByName(userName);
-        if (userBasePo!=null && StringUtils.isEmpty(userBasePo.getUserName())){
+        if (userBasePo!=null && !StringUtils.isEmpty(userBasePo.getUserName())){
             if (!password.equals(userBasePo.getPassword())){
                 return MessageResult.build("0","用户名或密码错误！");
             }
