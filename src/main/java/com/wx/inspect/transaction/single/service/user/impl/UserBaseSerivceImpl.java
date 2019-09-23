@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserBaseSerivceImpl implements UserBaseSerivce {
 
@@ -19,5 +21,21 @@ public class UserBaseSerivceImpl implements UserBaseSerivce {
     @Override
     public TbUserBasePo findUserByName(String userName) {
         return tbUserBaseMapper.findUserByName(userName);
+    }
+
+    @Override
+    public boolean registUser(TbUserBasePo tbUserBasePo) {
+        tbUserBasePo.setArea("");
+        tbUserBasePo.setIsDel((byte)0);
+        tbUserBasePo.setMobile("");
+        tbUserBasePo.setCreateTime(new Date());
+        tbUserBasePo.setAuth(1);
+        int insert = tbUserBaseMapper.insert(tbUserBasePo);
+        if (insert>0){
+            return true;
+        }else {
+            logger.info("插入失败");
+            return false;
+        }
     }
 }

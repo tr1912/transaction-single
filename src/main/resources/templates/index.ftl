@@ -235,7 +235,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer">
-                    2015 © Ubold.
+                    2019 © WX.Inc
                 </footer>
 
             </div>

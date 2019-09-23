@@ -38,23 +38,23 @@
 				</div>
 
 				<div class="panel-body">
-					<form class="form-horizontal m-t-20" action="/index">
+					<form class="form-horizontal m-t-20" action="/regist/regist">
 
 						<div class="form-group ">
 							<div class="col-xs-12">
-								<input class="form-control" type="email" required="" placeholder="邮箱地址">
+								<input class="form-control" name="email" type="email" required="" placeholder="邮箱地址">
 							</div>
 						</div>
 
 						<div class="form-group ">
 							<div class="col-xs-12">
-								<input class="form-control" type="text" required="" placeholder="用户名">
+								<input class="form-control" name="userName" type="text" required="" placeholder="用户名">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-xs-12">
-								<input class="form-control" type="password" required="" placeholder="密码">
+								<input class="form-control" name="password" type="password" required="" placeholder="密码">
 							</div>
 						</div>
 

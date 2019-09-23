@@ -20,7 +20,7 @@ public interface TbUserBaseMapper {
      * 
      * @param tbUserBasePo 待插入对象
      */
-    void insert(TbUserBasePo tbUserBasePo);
+    int insert(TbUserBasePo tbUserBasePo);
 
     /**
      * 批量插入多条数据
