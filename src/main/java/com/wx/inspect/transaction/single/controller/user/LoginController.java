@@ -4,6 +4,7 @@ import com.wx.inspect.transaction.single.base.BaseController;
 import com.wx.inspect.transaction.single.base.MessageResult;
 import com.wx.inspect.transaction.single.po.TbUserBasePo;
 import com.wx.inspect.transaction.single.service.user.UserBaseSerivce;
+import com.wx.inspect.transaction.single.service.user.UserLogsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class LoginController extends BaseController {
     @Autowired
     private UserBaseSerivce userBaseSerivce;
 
+    @Autowired
+    private UserLogsService userLogsService;
+
     /**
      * 登录判断方法
      * @param userName
@@ -37,6 +41,7 @@ public class LoginController extends BaseController {
                 return MessageResult.build("0","用户名或密码错误！");
             }
             setAccount(userBasePo);
+            userLogsService.loggerUserlog(userBasePo,"login");
         }else {
             return MessageResult.build("0","用户名或密码错误！");
         }

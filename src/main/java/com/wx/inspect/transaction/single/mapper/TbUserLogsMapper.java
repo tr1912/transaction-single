@@ -19,7 +19,7 @@ public interface TbUserLogsMapper {
      * 
      * @param tbUserLogsPo 待插入对象
      */
-    void insert(TbUserLogsPo tbUserLogsPo);
+    int insert(TbUserLogsPo tbUserLogsPo);
 
     /**
      * 批量插入多条数据
