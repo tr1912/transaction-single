@@ -22,7 +22,7 @@ pagehelper:
   reasonable: true
 
 logging:
-  path: /data/logs/wx-inspect-transaction-single
+  path: /Users/wangxiao/data/logs/wx-inspect-transaction-single
   file: wx-transactionsingle
   level:
     root: info
