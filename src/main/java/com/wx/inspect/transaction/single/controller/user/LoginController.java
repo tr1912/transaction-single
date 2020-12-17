@@ -27,24 +27,25 @@ public class LoginController extends BaseController {
 
     /**
      * 登录判断方法
+     *
      * @param userName
      * @param password
      * @return
      */
     @RequestMapping("/login")
     @ResponseBody
-    public MessageResult login(String userName,String password){
+    public MessageResult login(String userName, String password) {
 
         TbUserBasePo userBasePo = userBaseSerivce.findUserByName(userName);
-        if (userBasePo!=null && !StringUtils.isEmpty(userBasePo.getUserName())){
-            if (!password.equals(userBasePo.getPassword())){
-                return MessageResult.build("0","用户名或密码错误！");
+        if (userBasePo != null && !StringUtils.isEmpty(userBasePo.getUserName())) {
+            if (!password.equals(userBasePo.getPassword())) {
+                return MessageResult.build("0", "用户名或密码错误！");
             }
             setAccount(userBasePo);
-            userLogsService.loggerUserlog(userBasePo,"login");
-        }else {
-            return MessageResult.build("0","用户名或密码错误！");
+            userLogsService.loggerUserlog(userBasePo, "login");
+        } else {
+            return MessageResult.build("0", "用户名或密码错误！");
         }
-        return MessageResult.build("1","登录成功");
+        return MessageResult.build("1", "登录成功");
     }
 }
